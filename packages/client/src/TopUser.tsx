@@ -29,7 +29,7 @@ export const TopUser = () => {
     const achievements = useRows(storeCache, { table: "Achievements" });
 
     return (
-        <List style={{ width: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
+        <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
             {achievements.sort((a, b) => {
                 return b.value.total - a.value.total
             })
@@ -41,7 +41,7 @@ export const TopUser = () => {
                         borderRadius: "15px",
                         display: "flex",
                         marginLeft: "24px",
-                        marginBottom: "16px"
+                        marginTop: "16px"
                     }}>
                         <div style={{
                             width: "56px", height: "56px", borderRadius: "35.5px", backgroundColor: "#ffffff", textAlign: "center",

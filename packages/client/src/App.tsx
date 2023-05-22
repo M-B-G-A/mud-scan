@@ -2,7 +2,8 @@ import { useComponentValue, useRows } from "@latticexyz/react";
 import { useMUD } from "./MUDContext";
 import { useState } from "react";
 import { Header } from "./Header";
-import { Home } from "./Home";;
+import { Home } from "./Home";
+import React from 'react';
 
 export const App = () => {
   const {
