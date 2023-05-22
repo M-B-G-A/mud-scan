@@ -9,8 +9,8 @@ export function createSystemCalls(
   { worldSend, txReduced$, singletonEntity }: SetupNetworkResult,
   { Achievements }: ClientComponents
 ) {
-  const setAchievement = async (score: number, nth: number) => {
-    const tx = await worldSend("setAchievement", [score, nth]);
+  const setAchievement = async (address: string, score: number, nth: number) => {
+    const tx = await worldSend("setAchievement", [address, score, nth]);
     await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
     return getComponentValue(Achievements, singletonEntity);
   };

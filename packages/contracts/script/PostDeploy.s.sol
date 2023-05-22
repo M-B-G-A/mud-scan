@@ -16,7 +16,7 @@ contract PostDeploy is Script {
     // ------------------ EXAMPLES ------------------
 
     // Call increment on the world via the registered function selector
-    IWorld(worldAddress).setAchievement(0, 0);
+    // IWorld(worldAddress).MudScan_AchievementSyste_setAchievement(address(0x0), 0, 0);
 
     vm.stopBroadcast();
   }

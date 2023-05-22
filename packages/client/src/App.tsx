@@ -6,7 +6,7 @@ export const App = () => {
   const {
     components: { Achievements },
     systemCalls: { setAchievement },
-    network: { playerEntity },
+    network: { playerEntity, network },
   } = useMUD();
 
   const achievement = useComponentValue(Achievements, playerEntity);
@@ -48,7 +48,8 @@ export const App = () => {
         type="button"
         onClick={async (event) => {
           event.preventDefault();
-          await setAchievement(Number(stageScore), Number(stageNumber));
+          const walletAddress = network.connectedAddress.get();
+          if(walletAddress) await setAchievement(walletAddress, Number(stageScore), Number(stageNumber));
         }}
       >
         Update Achievement
