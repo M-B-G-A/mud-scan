@@ -12,6 +12,8 @@
     "test": "tsc --noEmit"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@ethersproject/providers": "^5.7.2",
     "@latticexyz/common": "2.0.0-alpha.1.183+07a99974",
     "@latticexyz/dev-tools": "2.0.0-alpha.1.183+07a99974",
@@ -22,6 +24,7 @@
     "@latticexyz/std-client": "2.0.0-alpha.1.183+07a99974",
     "@latticexyz/utils": "2.0.0-alpha.1.183+07a99974",
     "@latticexyz/world": "2.0.0-alpha.1.183+07a99974",
+    "@mui/material": "^5.13.1",
     "@wagmi/chains": "^0.2.22",
     "contracts": "workspace:*",
     "ethers": "^5.7.2",
