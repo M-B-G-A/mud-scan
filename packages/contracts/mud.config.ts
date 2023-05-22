@@ -1,7 +1,7 @@
 import { mudConfig } from "@latticexyz/world/register";
 
 export default mudConfig({
-  // namespace: "MudScan",
+  namespace: "MudScan",
   tables: {
     Avatar: "string",
     Achievements: {
@@ -10,5 +10,12 @@ export default mudConfig({
         mask: "uint256",
       },
     },
+  },
+});
+
+export const rootConfig = mudConfig({
+  namespace: "",
+  tables: {
+    Avatar: "string",
   },
 });

@@ -6,7 +6,7 @@ import { defineComponent, Type as RecsType, World } from "@latticexyz/recs";
 export function defineContractComponents(world: World) {
   return {
     Avatar: (() => {
-      const tableId = new TableId("", "Avatar");
+      const tableId = new TableId("MudScan", "Avatar");
       return defineComponent(
         world,
         {
@@ -21,7 +21,7 @@ export function defineContractComponents(world: World) {
       );
     })(),
     Achievements: (() => {
-      const tableId = new TableId("", "Achievements");
+      const tableId = new TableId("MudScan", "Achievements");
       return defineComponent(
         world,
         {
