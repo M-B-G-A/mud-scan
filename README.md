@@ -1,5 +1,7 @@
 # MUD-scan
 
+working game example code at [here](https://github.com/M-B-G-A/emojimon)
+
 ## first Game Stat Site developed with MUD
 
 [![mudscan demo](https://github.com/M-B-G-A/mud-scan/assets/7679722/972e5b9e-1efb-4ab0-b361-c4a2b92ab08b)](https://mudscan.buidl.day/?chainId=4242)
