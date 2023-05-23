@@ -5,6 +5,7 @@ import { useFilePicker } from 'use-file-picker';
 import { useEffect } from "react";
 import { storeFiles } from "./FileUtil";
 import React from "react";
+import AppIcon from '../resources/app_icon.png'
 
 export const Header = () => {
 
@@ -49,7 +50,7 @@ export const Header = () => {
                     flexDirection: "row",
                     alignItems: "center"
                 }}>
-                    <img src="../resources/app_icon.png" style={{ height: "55px", width: "55px" }} />
+                    <img src={AppIcon} style={{ height: "55px", width: "55px" }} />
                     <Typography style={{
                         color: "#000000",
                         marginLeft: "14px",
