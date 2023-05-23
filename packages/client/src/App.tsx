@@ -1,6 +1,4 @@
-import { useComponentValue, useRows } from "@latticexyz/react";
 import { useMUD } from "./MUDContext";
-import { useState } from "react";
 import { Header } from "./Header";
 import { Home } from "./Home";
 import React from 'react';
@@ -9,10 +7,11 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/material/Icon';
 
 export const App = () => {
+  
   const {
-    components: { Achievements },
-    network: { playerEntity, network, storeCache },
+    network: { storeCache },
   } = useMUD();
+
   const [open, setOpen] = React.useState(false);
 
   storeCache.tables.Achievements.subscribe((storeEvent) => {
