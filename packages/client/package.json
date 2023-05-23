@@ -28,10 +28,13 @@
     "@mui/material": "^5.13.1",
     "@wagmi/chains": "^0.2.22",
     "contracts": "workspace:*",
+    "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "^7.8.1",
+    "use-file-picker": "^1.6.1",
+    "web3.storage": "^4.5.4",
     "zustand": "^4.3.8"
   },
   "devDependencies": {

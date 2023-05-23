@@ -8,7 +8,6 @@ import React from 'react';
 export const App = () => {
   const {
     components: { Achievements },
-    systemCalls: { setAchievement },
     network: { playerEntity, network, storeCache },
   } = useMUD();
 

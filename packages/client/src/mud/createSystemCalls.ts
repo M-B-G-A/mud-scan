@@ -7,15 +7,15 @@ export type SystemCalls = ReturnType<typeof createSystemCalls>;
 
 export function createSystemCalls(
   { worldSend, txReduced$, singletonEntity }: SetupNetworkResult,
-  { Achievements }: ClientComponents
+  { Achievements, Avatar }: ClientComponents
 ) {
-  const setAchievement = async (address: string, score: number, nth: number) => {
-    const tx = await worldSend("setAchievement", [address, score, nth]);
+  const setAvatar = async (url: string) => {
+    const tx = await worldSend("EmojiMon_AvatarSystem_setAvatar", [url]);
     await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
-    return getComponentValue(Achievements, singletonEntity);
+    return getComponentValue(Avatar, singletonEntity);
   };
 
   return {
-    setAchievement,
+    setAvatar,
   };
 }
