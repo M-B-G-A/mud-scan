@@ -30,6 +30,7 @@
     "contracts": "workspace:*",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
+    "notistack": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rxjs": "^7.8.1",

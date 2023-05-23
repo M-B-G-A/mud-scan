@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Header } from "./Header";
 import { Home } from "./Home";
 import React from 'react';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 export const App = () => {
   const {
@@ -35,12 +36,14 @@ export const App = () => {
 
   return (
     <>
+    <SnackbarProvider maxSnack={3}>
       <div style={styles.wrapper}>
         <Header />
         <div style={styles.body}>
           <Home />
         </div>
       </div>
+      </SnackbarProvider>
     </>
   );
 };
