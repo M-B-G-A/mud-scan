@@ -9,7 +9,6 @@ import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 export const App = () => {
   const {
     components: { Achievements },
-    systemCalls: { setAchievement },
     network: { playerEntity, network, storeCache },
   } = useMUD();
 

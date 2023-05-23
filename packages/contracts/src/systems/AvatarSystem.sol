@@ -7,10 +7,10 @@ import { addressToEntityKey } from "../addressToEntityKey.sol";
 
 contract AvatarSystem is System {
 
-  function setAchievement (address playerAddress, string memory url) public {
+  function setAvatar (string memory url) public {
     // TODO:check callee is system's owner or allow list
     // console.log(_msgSender());
-    bytes32 player = addressToEntityKey(address(playerAddress));
+    bytes32 player = addressToEntityKey(_msgSender());
     Avatar.set(player, url);
     // emit GetAchievement(player, stage, score);
   }
