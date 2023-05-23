@@ -8,12 +8,12 @@ export const localTestnet = {
     nativeCurrency: { decimals: 18, name: "Ether", symbol: "ETH" },
     rpcUrls: {
       default: {
-        http: ["https://foundry.buidl.day:8545"],
-        webSocket: ["wss://foundry.buidl.day:8545"],
+        http: ["https://foundry.buidl.day"],
+        webSocket: ["wss://foundry.buidl.day"],
       },
       public: {
-        http: ["https://foundry.buidl.day:8545"],
-        webSocket: ["wss://foundry.buidl.day:8545"],
+        http: ["https://foundry.buidl.day"],
+        webSocket: ["wss://foundry.buidl.day"],
       },
     },
     // modeUrl: "https://mode.testnet-mud-services.linfra.xyz",
