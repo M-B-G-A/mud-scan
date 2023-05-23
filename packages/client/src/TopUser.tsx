@@ -13,6 +13,18 @@ export const TopUser = () => {
 
     const achievements = useRows(storeCache, { table: "Achievements" });
 
+    function getMedal(number: number): string {
+        if (number === 1) {
+          return "🥇";
+        } else if (number === 2) {
+          return "🥈";
+        } else if (number === 3) {
+          return "🥉";
+        } else {
+          return number.toString();
+        }
+      }
+
     return (
         <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
             {achievements.sort((a, b) => {
@@ -30,9 +42,9 @@ export const TopUser = () => {
                     }}>
                         <div style={{
                             width: "56px", height: "56px", borderRadius: "35.5px", backgroundColor: "#ffffff", textAlign: "center",
-                            lineHeight: "56px",
+                            lineHeight: "56px", fontSize: "20px"
                         }}>
-                            {index + 1}
+                            {getMedal(index + 1)}
                         </div>
                         <div style={{ flex: "1", marginLeft: "35px", textOverflow: "ellipsis" }}>
                             {truncateMiddle(data.key.key, 13)}
