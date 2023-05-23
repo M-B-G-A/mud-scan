@@ -4,6 +4,7 @@ import { useComponentValue, useRows } from "@latticexyz/react";
 import { createStore } from "zustand";
 import React, { useState, useEffect } from "react";
 import { truncateMiddle } from "./Utils";
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 export class PlayedGame {
     type: string;
@@ -34,7 +35,11 @@ export class PlayedGame {
 }
 
 export const RecentlyPlayedGame = () => {
+    const { enqueueSnackbar } = useSnackbar();
+
     const [games, setGames] = useState<PlayedGame[]>([]);
+
+    let lastGame: PlayedGame | null = null;
 
     const {
         components: { Achievements },
@@ -43,7 +48,6 @@ export const RecentlyPlayedGame = () => {
     } = useMUD();
 
     ecsEvent$.subscribe((event) => {
-        console.log(event);
         if (event.type == 'NetworkComponentUpdate' && event.table == 'Achievements') {
 
             let item = new PlayedGame(
@@ -55,7 +59,15 @@ export const RecentlyPlayedGame = () => {
                 event.entity,
                 event.txHash == 'cache' ? null : getCurrentTimestamp()
             );
+            
             setGames(games.concat(item));
+
+            if (event.txHash != 'cache') {
+                if (lastGame?.blockNumber != item.blockNumber) {
+                    enqueueSnackbar('Update Now!!!!!!!');
+                    lastGame = item
+                }
+            }
         }
     });
 
