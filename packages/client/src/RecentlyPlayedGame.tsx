@@ -1,12 +1,9 @@
-import { Container, List, ListItem, ListItemText, alpha } from '@mui/material';
+import { List, ListItem } from '@mui/material';
 import { useMUD } from "./MUDContext";
-import { useComponentValue, useRows } from "@latticexyz/react";
-import { createStore } from "zustand";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { truncateMiddle } from "./Utils";
-import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
-export class PlayedGame {
+class PlayedGame {
     type: string;
     blockNumber: number;
     txHash: string;
@@ -35,21 +32,15 @@ export class PlayedGame {
 }
 
 export const RecentlyPlayedGame = () => {
-    const { enqueueSnackbar } = useSnackbar();
 
     const [games, setGames] = useState<PlayedGame[]>([]);
 
-    let lastGame: PlayedGame | null = null;
-
     const {
-        components: { Achievements },
-        systemCalls: { setAchievement },
         network: { ecsEvent$ },
     } = useMUD();
 
     ecsEvent$.subscribe((event) => {
         if (event.type == 'NetworkComponentUpdate' && event.table == 'Achievements') {
-
             let item = new PlayedGame(
                 event.type,
                 event.blockNumber,
@@ -91,8 +82,14 @@ export const RecentlyPlayedGame = () => {
     }
 
     return (
-        <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
-            {games
+        <List style={{ 
+            width: "100%", 
+            height: "100%", 
+            backgroundColor: "#ffffff", 
+            marginTop: "21px", 
+            borderRadius: "15px" 
+        }}>
+            { games
                 .map((data, index) => (
                     <ListItem style={{
                         height: "119px",
@@ -120,8 +117,7 @@ export const RecentlyPlayedGame = () => {
                             {data.txHash == 'cache' ?
                                 <div style={{ fontSize: '24px' }}>
                                     📦
-                                </div>
-                                :
+                                </div> :
                                 <div style={{
                                     width: "51px",
                                     height: "38px",
@@ -149,7 +145,6 @@ export const RecentlyPlayedGame = () => {
                                     width: "50px",
                                     textAlign: "center"
                                 }}>
-
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -162,7 +157,7 @@ export const RecentlyPlayedGame = () => {
                                     textOverflow: 'ellipsis',
                                     fontWeight: 600
                                 }}>
-                                    {processNumber(data.blockNumber)}
+                                    { processNumber(data.blockNumber) }
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -195,7 +190,9 @@ export const RecentlyPlayedGame = () => {
                             <div style={{
                                 display: "table-row",
                                 height: "16px",
-                            }}></div>
+                            }}>
+                                { /* nothing */ }
+                            </div>
                             <div style={{
                                 display: "table-row"
                             }}>
@@ -212,7 +209,7 @@ export const RecentlyPlayedGame = () => {
                                     maxWidth: "120px",
                                     textAlign: "right"
                                 }}>
-                                    {data.timestamp == null ? '-' : formatTimeAgo(data.timestamp)}
+                                    { data.timestamp == null ? '-' : formatTimeAgo(data.timestamp) }
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -236,7 +233,7 @@ export const RecentlyPlayedGame = () => {
                                     whiteSpace: "nowrap",
                                     fontWeight: 600,
                                 }}>
-                                    {truncateMiddle(data.userId, 13)}
+                                    { truncateMiddle(data.userId, 13) }
                                 </div>
                             </div>
                         </div>
