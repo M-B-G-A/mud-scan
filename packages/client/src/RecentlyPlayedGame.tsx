@@ -215,9 +215,9 @@ export const RecentlyPlayedGame = () => {
                                 }} />
                                 <div style={{
                                     display: "table-cell",
-                                    width: "98px",
-                                    minWidth: "98px",
-                                    maxWidth: "98px",
+                                    width: "120px",
+                                    minWidth: "120px",
+                                    maxWidth: "120px",
                                     textAlign: "right"
                                 }}>
                                     {data.timestamp == null ? '-' : formatTimeAgo(data.timestamp)}
