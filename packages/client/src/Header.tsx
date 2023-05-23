@@ -57,7 +57,7 @@ export const Header = () => {
                         verticalAlign: "center",
                         fontSize: "24px"
                     }}>
-                        Mud SCAN
+                        MUD SCAN
                     </Typography>
                 </div>
                 <div>
