@@ -59,15 +59,7 @@ export const RecentlyPlayedGame = () => {
                 event.entity,
                 event.txHash == 'cache' ? null : getCurrentTimestamp()
             );
-            
-            setGames(games.concat(item));
-
-            if (event.txHash != 'cache') {
-                if (lastGame?.blockNumber != item.blockNumber) {
-                    enqueueSnackbar('Update Now!!!!!!!');
-                    lastGame = item
-                }
-            }
+            setGames([item].concat(games));
         }
     });
 
@@ -100,7 +92,7 @@ export const RecentlyPlayedGame = () => {
 
     return (
         <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
-            {games.reverse()
+            {games
                 .map((data, index) => (
                     <ListItem style={{
                         height: "119px",

@@ -25,6 +25,11 @@ export const TopUser = () => {
         }
       }
 
+      function formatValue(value: string): string {
+        const formattedValue = value.replace(/^0x0+/, '0x');
+  return formattedValue;
+      }
+
     return (
         <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
             {achievements.sort((a, b) => {
@@ -47,7 +52,7 @@ export const TopUser = () => {
                             {getMedal(index + 1)}
                         </div>
                         <div style={{ flex: "1", marginLeft: "35px", textOverflow: "ellipsis" }}>
-                            {truncateMiddle(data.key.key, 13)}
+                            {truncateMiddle(formatValue(data.key.key), 20)}
                         </div>
                         <div style={{ flexBasis: "10%", textAlign: "right" }}>
                             {data.value.total}
