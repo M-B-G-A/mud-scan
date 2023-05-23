@@ -3,6 +3,7 @@ import { useMUD } from "./MUDContext";
 import { useComponentValue, useRows } from "@latticexyz/react";
 import { createStore } from "zustand";
 import React, { useState, useEffect } from "react";
+import { truncateMiddle } from "./Utils";
 
 export class PlayedGame {
     type: string;
@@ -11,7 +12,7 @@ export class PlayedGame {
     table: string;
     gameName: string;
     userId: string;
-    timestamp: number;
+    timestamp: number | null;
 
     constructor(
         type: string,
@@ -20,7 +21,7 @@ export class PlayedGame {
         table: string,
         gameName: string,
         userId: string,
-        timestamp: number
+        timestamp: number | null
     ) {
         this.type = type;
         this.blockNumber = blockNumber;
@@ -44,6 +45,7 @@ export const RecentlyPlayedGame = () => {
     ecsEvent$.subscribe((event) => {
         console.log(event);
         if (event.type == 'NetworkComponentUpdate' && event.table == 'Achievements') {
+
             let item = new PlayedGame(
                 event.type,
                 event.blockNumber,
@@ -51,16 +53,42 @@ export const RecentlyPlayedGame = () => {
                 event.table,
                 event.namespace,
                 event.entity,
-                0
+                event.txHash == 'cache' ? null : getCurrentTimestamp()
             );
             setGames(games.concat(item));
-            console.log(event);
         }
     });
 
+    function processNumber(num: number): string {
+        const formattedNum = "#" + num.toString().padStart(14, '\u00A0');
+        return formattedNum;
+    }
+
+    function getCurrentTimestamp(): number {
+        const now = new Date();
+        const timestamp = now.getTime();
+        return timestamp;
+    }
+
+    function formatTimeAgo(timestamp: number): string {
+        const currentTime = new Date().getTime();
+        const diffInMillis = currentTime - timestamp;
+
+        const diffInMinutes = Math.floor(diffInMillis / (1000 * 60));
+
+        if (diffInMinutes < 1) {
+            return "few seconds ago";
+        } else if (diffInMinutes < 60) {
+            return `${diffInMinutes} minutes ago`;
+        } else {
+            const diffInHours = Math.floor(diffInMinutes / 60);
+            return `${diffInHours} hours ago`;
+        }
+    }
+
     return (
         <List style={{ width: "100%", height: "100%", backgroundColor: "#ffffff", marginTop: "21px", borderRadius: "15px" }}>
-            {games
+            {games.reverse()
                 .map((data, index) => (
                     <ListItem style={{
                         height: "119px",
@@ -85,16 +113,24 @@ export const RecentlyPlayedGame = () => {
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-                            <div style={{
-                                width: "51px",
-                                height: "38px",
-                                display: '-webkit-box',
-                                WebkitLineClamp: 1,
-                                WebkitBoxOrient: 'vertical',
-                                overflow: 'hidden'
-                            }}>
-                                {data.txHash}
-                            </div>
+                            {data.txHash == 'cache' ?
+                                <div style={{ fontSize: '24px' }}>
+                                    📦
+                                </div>
+                                :
+                                <div style={{
+                                    width: "51px",
+                                    height: "38px",
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    wordBreak: 'break-all',
+                                    fontSize: '15px'
+                                }}>
+                                    {truncateMiddle(data.txHash, 13)}
+                                </div>}
                         </div>
                         <div style={{
                             display: "table",
@@ -106,9 +142,10 @@ export const RecentlyPlayedGame = () => {
                             }}>
                                 <div style={{
                                     display: "table-cell",
-                                    width: "25px",
+                                    width: "50px",
+                                    textAlign: "center"
                                 }}>
-                                    #
+
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -119,9 +156,9 @@ export const RecentlyPlayedGame = () => {
                                     whiteSpace: "nowrap",
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
-                                    fontWeight: 600,
+                                    fontWeight: 600
                                 }}>
-                                    {data.blockNumber}
+                                    {processNumber(data.blockNumber)}
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -169,8 +206,9 @@ export const RecentlyPlayedGame = () => {
                                     width: "98px",
                                     minWidth: "98px",
                                     maxWidth: "98px",
+                                    textAlign: "right"
                                 }}>
-                                    {data.timestamp}
+                                    {data.timestamp == null ? '-' : formatTimeAgo(data.timestamp)}
                                 </div>
                                 <div style={{
                                     display: "table-cell",
@@ -192,11 +230,9 @@ export const RecentlyPlayedGame = () => {
                                     textAlign: "right",
                                     maxWidth: "88px",
                                     whiteSpace: "nowrap",
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
                                     fontWeight: 600,
                                 }}>
-                                    {data.userId}
+                                    {truncateMiddle(data.userId, 13)}
                                 </div>
                             </div>
                         </div>
